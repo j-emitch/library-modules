@@ -1,14 +1,20 @@
 var Library = function () {
-  var addBook = function () {
-
+  var books = [];
+  
+  var addBook = function (book) {
+    books.push(book);
   };
 
-  var checkOutBook = function () {
-
+  var checkOutBook = function (book) {
+    if (books.includes(book)){
+      book.setAttribute('checkedOut', true);
+    }
   };
 
-  var returnBook = function () {
-
+  var returnBook = function (book) {
+    if (books.includes(book)){
+      book.setAttribute('checkedOut', false);
+    }
   };
 
   return {
@@ -18,17 +24,27 @@ var Library = function () {
   };
 };
 
-var Book = function () {
-  var get = function () {
-
+var Book = function (title, author) {
+  var attributes = {
+    checkedOut: false,
+    title: title,
+    author: author
+  };
+  
+  var getAttribute = function (prop) {
+    if (attributes.hasOwnProperty(prop)){
+      return attributes[prop];
+    }
   };
 
-  var set = function () {
-
+  var setAttribute = function (prop, value) {
+    if (attributes.hasOwnProperty(prop)){
+      attributes[prop] = value;
+    }
   };
 
   return {
-    get: get,
-    set: set
+    getAttribute: getAttribute,
+    setAttribute: setAttribute
   };
 }
